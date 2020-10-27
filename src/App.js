@@ -1,24 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useRef } from "react";
+import { Canvas, useFrame } from "react-three-fiber";
+import "./App.css";
+
+function Cube() {
+  const ref = useRef();
+  useFrame(() => (ref.current.rotation.x += 0.01));
+  return (
+    <mesh ref={ref}>
+      <boxBufferGeometry attach="geometry" args={[3, 3, 3]} />
+      <meshNormalMaterial attach="material" />
+    </mesh>
+  );
+}
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Canvas camera={{ position: [0, 0, 5], near: 0.1, far: 10, fov: 70 }}>
+        <Cube />
+      </Canvas>
+    </>
   );
 }
 
