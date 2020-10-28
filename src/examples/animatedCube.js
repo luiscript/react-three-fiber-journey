@@ -5,7 +5,7 @@ import { a, useSpring } from "@react-spring/three";
 function Box(props) {
   const { offset, phase } = props;
   const ref = useRef();
-  useFrame(() => (ref.current.rotation.y += phase / 100));
+  useFrame(() => (ref.current.rotation.y += phase / 200));
 
   const [active, setActive] = useState(0);
 
@@ -22,6 +22,8 @@ function Box(props) {
   return (
     <a.group ref={ref} position-y={translate}>
       <a.mesh
+        castShadow
+        receiveShadow
         scale-x={scale}
         scale-z={scale}
         onClick={() => setActive(Number(!active))}
@@ -30,7 +32,7 @@ function Box(props) {
         <a.meshStandardMaterial
           roughness={0.5}
           attach="material"
-          color={color}
+          color={"#f00"}
         />
       </a.mesh>
     </a.group>
